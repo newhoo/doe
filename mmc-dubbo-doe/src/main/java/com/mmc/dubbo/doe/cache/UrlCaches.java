@@ -9,16 +9,15 @@
  */
 package com.mmc.dubbo.doe.cache;
 
+import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
 import com.mmc.dubbo.doe.model.UrlModel;
-import com.mmc.dubbo.doe.util.StringUtil;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author Joey
@@ -33,27 +32,29 @@ public class UrlCaches {
      *
      * @param interfaceName
      * @param urls
-     * @return
      */
     public static List<UrlModel> cache(String interfaceName, List<URL> urls) {
 
         List<UrlModel> ret = new ArrayList<>();
 
-        for (int i = 0; i < urls.size(); i++) {
+        for (URL url : urls) {
 
-            URL url = urls.get(i);
-            String key = generateUrlKey(interfaceName, url.getHost(), url.getPort());
+            String key = generateUrlKey(interfaceName, url);
             UrlModel model = new UrlModel(key, url);
             ret.add(model);
 
-            map.put(model.getKey(), model); // 存入缓存
+            map.put(model.getKey(), model);
         }
 
         return ret;
     }
 
-    private static String generateUrlKey(String interfaceName, String host, int port) {
-        return StringUtil.format("{}#{}#{}#", interfaceName, host, port);
+    private static String generateUrlKey(String interfaceName, URL provider) {
+        String host = provider.getHost();
+        int port = provider.getPort();
+        String version = provider.getParameter(Constants.VERSION_KEY);
+        String group = provider.getParameter(Constants.GROUP_KEY);
+        return String.format("%s#%s#%s#%s#%s", interfaceName, host, port, version, group);
     }
 
     public static UrlModel get(@NotNull String key) {

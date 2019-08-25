@@ -1,136 +1,122 @@
-<div class="sidebar" id="sidebar" th:fragment="lefter" xmlns:th="http://www.thymeleaf.org">
-    <script type="text/javascript">
-        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-    </script>
+<div th:fragment="lefter" xmlns:th="http://www.thymeleaf.org">
+    <div class="sidebar" id="sidebar" >
 
-    <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-            <button class="btn btn-success">
-                <i class="icon-signal"></i>
-            </button>
+        <script type="text/javascript">
 
-            <button class="btn btn-info">
-                <i class="icon-pencil"></i>
-            </button>
+            try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 
-            <button class="btn btn-warning">
-                <i class="icon-group"></i>
-            </button>
+        </script>
 
-            <button class="btn btn-danger">
-                <i class="icon-cogs"></i>
-            </button>
+        <div id="NoraMenuTree">
+
+            <ul id="16000000" class="nav nav-list">
+
+                <li id="f16001000" class="nr-pmenu">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-list"></i>
+                        <span class="menu-text"> 连接发送 </span>
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+                    <ul id="16001000" class="submenu">
+
+
+                        <li id="f16001100">
+                            <a href="main?mid=f16001100" data-url="/pages/v3/easyCnt.html">
+                                <i class="icon-double-angle-right"></i>
+                                极简模式
+                            </a>
+                        </li>
+
+
+                        <li id="f16001200">
+                            <a href="main?mid=f16001200" data-url="/pages/v3/normalCnt.html">
+                                <i class="icon-double-angle-right"></i>
+                                普通模式
+                            </a>
+                        </li>
+
+
+                        <li id="f16001300">
+                            <a href="main?mid=f16001300" data-url="/pages/v3/caseCnt.html">
+                                <i class="icon-double-angle-right"></i>
+                                用例模式
+                            </a>
+                        </li>
+
+                    </ul></li>
+                <li id="f16002000" class="nr-pmenu">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-exchange"></i>
+                        <span class="menu-text"> 依赖管理 </span>
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+                    <ul id="16002000" class="submenu">
+
+
+                        <li id="f16002100">
+                            <a href="main?mid=f16002100" data-url="/pages/v3/addJar.html">
+                                <i class="icon-double-angle-right"></i>
+                                增加依赖
+                            </a>
+                        </li>
+
+
+                        <li id="f16002200">
+                            <a href="main?mid=f16002200" data-url="/pages/v3/listJar.html">
+                                <i class="icon-double-angle-right"></i>
+                                依赖列表
+                            </a>
+                        </li>
+
+
+                        <li id="f16002300">
+                            <a href="main?mid=f16002300" data-url="/pages/v3/editPom.html">
+                                <i class="icon-double-angle-right"></i>
+                                依赖编辑
+                            </a>
+                        </li>
+
+                    </ul></li>
+                <li id="f16003000" class="nr-pmenu">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-cogs"></i>
+                        <span class="menu-text"> 系统管理 </span>
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+                    <ul id="16003000" class="submenu">
+
+
+                        <li id="f16003100">
+                            <a href="main?mid=f16003100" data-url="/pages/v3/listZk.html">
+                                <i class="icon-double-angle-right"></i>
+                                注册中心
+                            </a>
+                        </li>
+
+
+                        <li id="f16003200">
+                            <a href="main?mid=f16003200" data-url="/pages/v3/sys.html">
+                                <i class="icon-double-angle-right"></i>
+                                系统配置
+                            </a>
+                        </li>
+
+                    </ul></li></ul>
         </div>
 
-        <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-            <span class="btn btn-success"></span>
 
-            <span class="btn btn-info"></span>
 
-            <span class="btn btn-warning"></span>
+        <div class="sidebar-collapse" id="sidebar-collapse">
 
-            <span class="btn btn-danger"></span>
+            <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+
         </div>
-    </div><!-- #sidebar-shortcuts -->
-
-    <ul class="nav nav-list">
-        <li class="open active">
-
-            <a href="#" class="dropdown-toggle">
-                <i class="icon-list"></i>
-                <span class="menu-text"> 连接发送 </span>
-
-                <b class="arrow icon-angle-down"></b>
-            </a>
-
-            <ul class="submenu open ">
-                <li>
-                    <a href="easyCnt">
-                        <i class="icon-double-angle-right"></i>
-                        极简模式
-                    </a>
-                </li>
-                <li>
-                    <a href="normalCnt">
-                        <i class="icon-double-angle-right"></i>
-                        普通模式
-                    </a>
-                </li>
 
 
-                <li>
-                    <a href="caseCnt">
-                        <i class="icon-double-angle-right"></i>
-                        用例模式
-                    </a>
-                </li>
 
-            </ul>
-        </li>
+        <script type="text/javascript">
 
-        <li >
-            <a href="#" class="dropdown-toggle open">
-                <i class="icon-exchange"></i>
-                <span class="menu-text"> 依赖管理 </span>
+            try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
 
-                <b class="arrow icon-angle-down"></b>
-            </a>
-
-            <ul class="submenu">
-                <li>
-                    <a href="addJar">
-                        <i class="icon-double-angle-right"></i>
-                        增加依赖
-                    </a>
-                </li>
-
-                <li>
-                    <a href="listJar">
-                        <i class="icon-double-angle-right"></i>
-                        依赖列表
-                    </a>
-                </li>
-                <li>
-                    <a href="editPom">
-                        <i class="icon-double-angle-right"></i>
-                        依赖编辑
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#" class="dropdown-toggle open">
-                <i class="icon-cogs"></i>
-                <span class="menu-text"> 系统管理 </span>
-
-                <b class="arrow icon-angle-down"></b>
-            </a>
-
-            <ul class="submenu">
-                <li>
-                    <a href="listZk">
-                        <i class="icon-double-angle-right"></i>
-                        注册中心
-                    </a>
-                </li>
-                <li>
-                    <a href="sys">
-                        <i class="icon-double-angle-right"></i>
-                        系统配置
-                    </a>
-                </li>
-
-            </ul>
-        </li>
-
-    </ul><!-- /.nav-list -->
-
-    <div class="sidebar-collapse" id="sidebar-collapse">
-        <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+        </script>
     </div>
-
-    <script type="text/javascript">
-        try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-    </script>
-</div>

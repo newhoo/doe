@@ -21,5 +21,7 @@ public class UrlModelDTO {
     private String key;
     private String host;
     private Integer port;
+    private String group;
+    private String version;
 
 }

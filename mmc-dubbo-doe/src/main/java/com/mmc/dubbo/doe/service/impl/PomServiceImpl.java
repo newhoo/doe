@@ -311,60 +311,60 @@ public class PomServiceImpl implements PomService {
 
     }
 
-    @Deprecated // since v1.1.0
-    public ResultDTO<String> loadJars$$(String path) throws NoSuchMethodException, MalformedURLException {
-
-        String fullLibPath = StringUtils.isEmpty(path) ? this.libPath : path;
-
-        if (StringUtils.isEmpty(fullLibPath)) {
-            return ResultDTO.createErrorResult(StringUtil.format("can't found the path {}", fullLibPath), String.class);
-        }
-
-        if (!new File(fullLibPath).exists()) {
-            throw new DoeException(StringUtil.format("the path[{}] is not exists.", fullLibPath));
-        }
-
-        log.info("begin to load jars from {}.", fullLibPath);
-
-        // check for changes prevent to do useless job.
-        checkForChanges();
-
-        // 系统类库路径
-        File libPath = new File(fullLibPath);
-
-        // 获取所有的.jar和.zip文件
-        File[] jarFiles = libPath.listFiles((dir, name) -> name.endsWith(".jar") || name.endsWith(".zip"));
-
-        if (jarFiles != null) {
-            // 从URLClassLoader类中获取类所在文件夹的方法
-            // 对于jar文件，可以理解为一个存放class文件的文件夹
-            Method method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
-            boolean accessible = method.isAccessible();     // 获取方法的访问权限
-            try {
-                if (!accessible) {
-                    method.setAccessible(true);     // 设置方法的访问权限
-                }
-                // 获取系统类加载器
-                URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-                for (File file : jarFiles) {
-                    URL url = file.toURI().toURL();
-                    try {
-                        method.invoke(classLoader, url);
-                        log.debug("读取jar文件[name={}]", file.getName());
-                    } catch (Exception e) {
-                        log.error("读取jar文件[name={}]失败", file.getName());
-                    }
-                }
-                return ResultDTO.createSuccessResult("load jars completely and successfully", String.class);
-
-            } finally {
-                method.setAccessible(accessible);
-            }
-        } else {
-            return ResultDTO.createErrorResult(StringUtil.format("Can't found any jars from {}.", fullLibPath), String.class);
-        }
-
-    }
+//    @Deprecated // since v1.1.0
+//    public ResultDTO<String> loadJars$$(String path) throws NoSuchMethodException, MalformedURLException {
+//
+//        String fullLibPath = StringUtils.isEmpty(path) ? this.libPath : path;
+//
+//        if (StringUtils.isEmpty(fullLibPath)) {
+//            return ResultDTO.createErrorResult(StringUtil.format("can't found the path {}", fullLibPath), String.class);
+//        }
+//
+//        if (!new File(fullLibPath).exists()) {
+//            throw new DoeException(StringUtil.format("the path[{}] is not exists.", fullLibPath));
+//        }
+//
+//        log.info("begin to load jars from {}.", fullLibPath);
+//
+//        // check for changes prevent to do useless job.
+//        checkForChanges();
+//
+//        // 系统类库路径
+//        File libPath = new File(fullLibPath);
+//
+//        // 获取所有的.jar和.zip文件
+//        File[] jarFiles = libPath.listFiles((dir, name) -> name.endsWith(".jar") || name.endsWith(".zip"));
+//
+//        if (jarFiles != null) {
+//            // 从URLClassLoader类中获取类所在文件夹的方法
+//            // 对于jar文件，可以理解为一个存放class文件的文件夹
+//            Method method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
+//            boolean accessible = method.isAccessible();     // 获取方法的访问权限
+//            try {
+//                if (!accessible) {
+//                    method.setAccessible(true);     // 设置方法的访问权限
+//                }
+//                // 获取系统类加载器
+//                URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+//                for (File file : jarFiles) {
+//                    URL url = file.toURI().toURL();
+//                    try {
+//                        method.invoke(classLoader, url);
+//                        log.debug("读取jar文件[name={}]", file.getName());
+//                    } catch (Exception e) {
+//                        log.error("读取jar文件[name={}]失败", file.getName());
+//                    }
+//                }
+//                return ResultDTO.createSuccessResult("load jars completely and successfully", String.class);
+//
+//            } finally {
+//                method.setAccessible(accessible);
+//            }
+//        } else {
+//            return ResultDTO.createErrorResult(StringUtil.format("Can't found any jars from {}.", fullLibPath), String.class);
+//        }
+//
+//    }
 
     /**
      * list all dependency.

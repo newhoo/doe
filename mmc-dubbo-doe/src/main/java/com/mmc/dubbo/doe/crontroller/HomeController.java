@@ -39,10 +39,8 @@ public class HomeController {
         // you can do something here, such as auth validation,,,
         Integer menuId = Integer.valueOf(mid.substring(1));
         String path = menuService.getUrl(menuId);
-        String menuHtml = menuService.getHtml();
 
         model.addAttribute("mid", mid);
-        model.addAttribute("menuHtml", menuHtml);
 
         return path;
 

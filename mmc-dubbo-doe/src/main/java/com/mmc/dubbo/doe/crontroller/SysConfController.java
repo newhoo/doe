@@ -29,9 +29,6 @@ import java.net.MalformedURLException;
 @RequestMapping("/doe/sys")
 public class SysConfController {
 
-    @Value("${doe.watchdog.url}")
-    private String url;
-
     @Resource
     private PomService pomService;
 

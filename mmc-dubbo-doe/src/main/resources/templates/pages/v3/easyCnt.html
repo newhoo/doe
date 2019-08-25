@@ -22,7 +22,8 @@
 
     <div class="main-container-inner">
 
-        <div th:utext="${menuHtml}"></div>
+        <div th:replace="/pages/tpl/left::lefter"></div>
+
 
         <div class="main-content">
             <div th:replace="/pages/tpl/bread::breader"></div>
@@ -61,7 +62,7 @@
                                     <div class="widget-body">
                                         <div class="widget-main">
                                             <textarea class="form-control" id="txtConnect" rows="5"
-                                                      placeholder="127.0.0.1:20880"></textarea>
+                                                      placeholder="127.0.0.1:20880">127.0.0.1:20880</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +89,7 @@
                                         <div class="widget-main">
 
                                             <textarea class="form-control" id="txtInterfaces" rows="5"
-                                                      placeholder="com.mmc.dubbo.api.user.UserService"></textarea>
+                                                      placeholder="com.mmc.dubbo.api.user.UserService">com.mmc.dubbo.api.user.UserService</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +115,7 @@
                                         <div class="widget-main">
 
                                             <textarea class="form-control" id="txtMethods" rows="5"
-                                                      placeholder="getCurrentById"></textarea>
+                                                      placeholder="getCurrentById">getCurrentById</textarea>
                                         </div>
                                     </div>
                                 </div>

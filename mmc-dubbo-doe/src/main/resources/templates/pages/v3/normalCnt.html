@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Doe</title>
     <!-- 导入头部 ,统一引用那些静态资源  -->
-    <link rel="stylesheet" th:href="@{~/v3/assets/css/chosen.css}" />
+    <link rel="stylesheet" th:href="@{~/v3/assets/css/chosen.css}"/>
     <style>
-        .scroll { overflow-y: scroll; overflow-x: scroll;}
+        .scroll {
+            overflow-y: scroll;
+            overflow-x: scroll;
+        }
     </style>
     <script th:replace="/pages/tpl/head :: header"></script>
 </head>
@@ -25,7 +28,8 @@
 
     <div class="main-container-inner">
 
-        <div th:utext="${menuHtml}"></div>
+        <div th:replace="/pages/tpl/left::lefter"></div>
+
 
         <div class="main-content">
             <div th:replace="/pages/tpl/bread :: breader"></div>
@@ -53,17 +57,18 @@
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-8">
                                                 <div class="input-group">
-                                                    <select class="chosen-select width-95" id="txtConnect" data-placeholder="127.0.0.1:2181">
+                                                    <select class="chosen-select width-95" id="txtConnect"
+                                                            data-placeholder="127.0.0.1:2181">
 
                                                     </select>
                                                     <span class="input-group-btn">
-                                                        <button type="button" class="btn btn-purple btn-sm" onclick="doConnect();">
+                                                        <button type="button" class="btn btn-purple btn-sm"
+                                                                onclick="doConnect();">
                                                             连接
                                                             <!--<i class="icon-search icon-on-right bigger-110"></i>-->
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <span class="smaller-20 lighter blue">如有需要，请先设置group和version，再连接zk.</span>
                                             </div>
                                         </div>
                                     </form>
@@ -84,8 +89,9 @@
                                     <div class="widget-body">
                                         <div class="widget-main">
                                             <div class="row-fluid">
-                                                <br />
-                                                <select class="width-90 chosen-select" id="cboInterfaces" data-placeholder="请选择接口">
+                                                <br/>
+                                                <select class="width-90 chosen-select" id="cboInterfaces"
+                                                        data-placeholder="请选择接口">
 
                                                 </select>
                                                 <br>&nbsp;
@@ -104,8 +110,9 @@
                                     <div class="widget-body">
                                         <div class="widget-main">
                                             <div class="row-fluid">
-                                                <br />
-                                                <select class="width-90 chosen-select" id="cboProviders" data-placeholder="请选择提供者">
+                                                <br/>
+                                                <select class="width-90 chosen-select" id="cboProviders"
+                                                        data-placeholder="请选择提供者">
 
                                                 </select>
                                                 <br>&nbsp;
@@ -122,7 +129,7 @@
                                             <label class="control-label" for="txtVersion">接口版本</label>
 
                                             <div class="controls">
-                                                <input type="text" id="txtVersion" placeholder="" />
+                                                <input type="text" id="txtVersion" placeholder=""/>
                                             </div>
                                         </div>
 
@@ -130,7 +137,7 @@
                                             <label class="control-label" for="txtGroup">接口分组</label>
 
                                             <div class="controls">
-                                                <input type="text" id="txtGroup" placeholder="" />
+                                                <input type="text" id="txtGroup" placeholder=""/>
                                             </div>
                                         </div>
                                     </form>
@@ -170,14 +177,16 @@
                                         <div class="widget-main">
 
                                             <div class="row-fluid" style="height: 300px; overflow-scrolling: auto;">
-                                                <div class="control-group" id="txtMethods" style="height: 300px; overflow-y: scroll;">
+                                                <div class="control-group" id="txtMethods"
+                                                     style="height: 300px; overflow-y: scroll;">
 
 
                                                 </div>
                                                 <div style="display:none;" id="tplMethod">
                                                     <div class="radio">
                                                         <label>
-                                                            <input name="rdMethodKey" type="radio" class="ace rdMethod" value="{}"/>
+                                                            <input name="rdMethodKey" type="radio" class="ace rdMethod"
+                                                                   value="{}"/>
                                                             <span class="lbl" style="font-size: 10px;"> {} </span>
                                                         </label>
                                                     </div>
@@ -194,7 +203,8 @@
                                         <h4>方法参数</h4>
 
                                         <span class="widget-toolbar">
-														<a href="#" data-action="settings" id="formatParam" onclick="doFormatParam();">
+														<a href="#" data-action="settings" id="formatParam"
+                                                           onclick="doFormatParam();">
 															<i class="icon-eye-open"></i>
 														</a>
 														<a href="#" data-action="collapse">
@@ -223,7 +233,8 @@
                                         <h4>响应结果</h4>
 
                                         <span class="widget-toolbar">
-														<a href="#" data-action="settings" id="formatResult" onclick="doFormatResult();">
+														<a href="#" data-action="settings" id="formatResult"
+                                                           onclick="doFormatResult();">
 															<i class="icon-eye-open"></i>
 														</a>
 														<a href="#" data-action="collapse">
@@ -286,7 +297,7 @@
 </div>
 <!-- /.main-container -->
 <script type="text/javascript">
-    if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
 
 <script th:src="@{~/v3/assets/js/chosen.jquery.min.js}"></script>
@@ -304,10 +315,12 @@
         resultEditor.doFormat();
         $(".resultJsonEditor").addClass("scroll");
     }
+
     function doFormatParam() {
         paramEditor.doFormat();
         $(".paramJsonEditor").addClass("scroll");
     }
+
     function doSend() {
 
         var providerKey = $("#cboProviders").val();
@@ -323,7 +336,13 @@
             return;
         }
 
-        var params = {"providerKey": providerKey, "json": json, "methodKey": methodKey, "version": version, "group": group};
+        var params = {
+            "providerKey": providerKey,
+            "json": json,
+            "methodKey": methodKey,
+            "version": version,
+            "group": group
+        };
         Nora.Ajax("/doe/dubbo/doSend", params, function (data) {
 
             if (data.success && null != data.data && data.data.length > 0) {
@@ -343,14 +362,14 @@
         });
 
     }
-    
+
     function doPrepareMethodParams() {
 
-        $(":radio").click(function() {
+        $(":radio").click(function () {
 
             var methodKey = $(this).val();
 
-            var params = { "methodKey": methodKey};
+            var params = {"methodKey": methodKey};
             Nora.Ajax("/doe/dubbo/doListParams", params, function (data) {
 
                 if (data.success && null != data.data && data.data.length > 0) {
@@ -418,6 +437,7 @@
         var cboProvider = $("#cboProviders");
         Nora.Ajax("/doe/dubbo/doListProviders", params, function (data) {
 
+            cboProvider.html("<option value=\"\">&nbsp;</option>"); // clear
             if (data.success && null != data.data && data.data.length > 0) {
 
                 // on success
@@ -426,7 +446,11 @@
 
                     var d = data.data[i];
 
-                    var html = Nora.Util.StringUtil.format("<option value='{}'>{}:{}</option>", d.key, d.host, d.port);
+                    var showKey = d.host + ":" + d.port;
+                    if (d.version || d.group) {
+                        showKey += " -- " + d.version + ":" + d.group;
+                    }
+                    var html = Nora.Util.StringUtil.format("<option value='{}'>{}</option>", d.key, showKey);
                     cboProvider.append(html);
                 }
 
@@ -435,7 +459,7 @@
 
             } else {
                 // on fail
-                cboProvider.html("<option value=\"\">&nbsp;</option>"); // clear
+                // cboProvider.html("<option value=\"\">&nbsp;</option>"); // clear
                 cboProvider.chosen();
                 cboProvider.trigger("chosen:updated"); // 渲染
                 bootbox.alert(data.msg);
@@ -487,7 +511,7 @@
 
                 if (wholeWordSearch.length > 0) {
                     cboInterfaces.append(wholeWordSearch);
-                    cboInterfaces.append(keyWordSearch);
+                    // cboInterfaces.append(keyWordSearch);
                 }
 
                 cboInterfaces.chosen(); // 渲染
@@ -579,7 +603,8 @@
         });
 
     }
-    jQuery(function($) {
+
+    jQuery(function ($) {
 
         initConnection();
 
@@ -601,8 +626,8 @@
             , onError: function () {
             }
         });
-        $("#bootbox-regular").on('click', function() {
-            bootbox.prompt("请填写用例名称", function(result) {
+        $("#bootbox-regular").on('click', function () {
+            bootbox.prompt("请填写用例名称", function (result) {
                 if (result === null) {
                     //Example.show("Prompt dismissed");
                 } else {

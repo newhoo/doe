@@ -27,10 +27,8 @@ spring:
 doe:
   dependency:
     # 用于下载依赖的pom文件
-    pom: /app/doe/pom.xml
+    pom: tmp/pom.xml
     # 用于存放下载的jar的目录
-    lib: /app/doe/lib/
+    lib: tmp/lib/
     # 用于执行mvn命令超时时间（秒）
     timeout: 20
-  watchdog:
-    url: http://localhost:8000

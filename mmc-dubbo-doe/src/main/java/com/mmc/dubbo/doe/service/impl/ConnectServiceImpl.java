@@ -108,6 +108,8 @@ public class ConnectServiceImpl implements ConnectService {
             m.setKey(p.getKey());
             m.setHost(p.getUrl().getHost());
             m.setPort(p.getUrl().getPort());
+            m.setVersion(p.getUrl().getParameter(Constants.VERSION_KEY));
+            m.setGroup(p.getUrl().getParameter(Constants.GROUP_KEY));
 
             ret.add(m);
         });

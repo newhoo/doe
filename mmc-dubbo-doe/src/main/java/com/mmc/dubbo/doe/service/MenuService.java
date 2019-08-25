@@ -22,10 +22,4 @@ public interface MenuService {
      * @return the menu mrl
      */
     String getUrl(Integer mid);
-
-    /**
-     * get the menu text.
-     * @return
-     */
-    String getHtml();
 }

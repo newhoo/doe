@@ -20,11 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,11 +33,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class MenuServiceImpl implements MenuService {
 
-    /**
-     * 用户静态资源文件路径.
-     */
-    private static final String STATIC_MENU_PATH = "templates/pages/v3/";
-
     @Value("classpath:menu.json")
     private Resource resource;
 
@@ -49,15 +40,6 @@ public class MenuServiceImpl implements MenuService {
      * cache urls.
      */
     private Map<Integer, String> cacheMap;
-    /**
-     * the html text.
-     */
-    private String html;
-
-    @Override
-    public String getHtml() {
-        return html;
-    }
 
     @Override
     public String getUrl(Integer mid) {
@@ -90,67 +72,6 @@ public class MenuServiceImpl implements MenuService {
             log.error("fail to build the menu tree：", e);
             return;
         }
-        String html = toHtml("", root);
-        String projectRealPath = getProjectRealPath();
-        try {
-            createFile(projectRealPath, html);
-        } catch (Exception e) {
-            log.error("fail to create the menu file：", e);
-        }
-    }
-
-
-
-    private String getProjectRealPath() throws FileNotFoundException {
-
-        // useless when you run doe in the jar way, so comment these code.
-//        String path = ResourceUtils.getURL("classpath:").getPath();
-        String path = "/app/doe/";
-        path = path + STATIC_MENU_PATH;
-        return path;
-    }
-
-    private void createFile(String projectRealPath, String html) throws Exception {
-
-        // 创建目录
-        File path = new File(projectRealPath);
-        if (!path.exists()) {
-            path.mkdirs();
-        }
-
-        // 删除旧文件
-        File file = new File(path, "menu.html");
-        if (file.exists()) {
-            file.delete();
-        }
-
-        // 写入权限菜单
-        PrintWriter out = new PrintWriter(file);
-        String content = ""
-//                + "<div th:fragment=\"lefter\" xmlns:th=\"http://www.thymeleaf.org\">"
-                + "\n<div class=\"sidebar\" id=\"sidebar\" >                                                                                        \n"
-                + "\n    <script type=\"text/javascript\">                                                                                         \n"
-                + "\n        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}                                                                \n"
-                + "\n    </script>                                                                                                                 \n"
-                + "\n    <div id=\"NoraMenuTree\">                                                                                                 \n"
-                + html
-                + "\n    </div>                                                                                                                    \n"
-                + "\n                                                                                                                              \n"
-                + "\n    <div class=\"sidebar-collapse\" id=\"sidebar-collapse\">                                                                  \n"
-                + "\n        <i class=\"icon-double-angle-left\" data-icon1=\"icon-double-angle-left\" data-icon2=\"icon-double-angle-right\"></i> \n"
-                + "\n    </div>                                                                                                                    \n"
-                + "\n                                                                                                                              \n"
-                + "\n    <script type=\"text/javascript\">                                                                                         \n"
-                + "\n        try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}                                                            \n"
-                + "\n    </script>                                                                                                                 \n"
-//                + "\n</div>"
-                + "</div>";
-
-        this.html = content;
-        out.append(content);
-        out.flush();
-        out.close();
-
     }
 
     private MenuNode buildTree(List<MenuNode> menuList, int pMenuId) {
@@ -168,55 +89,4 @@ public class MenuServiceImpl implements MenuService {
         return result;
     }
 
-    private String toHtml(String elementId, MenuNode root) {
-
-        StringBuilder sb = new StringBuilder();
-        boolean useCache = true; // 判断是否使用缓存
-
-        for (MenuNode item : root.getChildren()) {
-
-            if (null != item && item.getChildren().size() > 0) {
-                if (item.getPmenuId() == -1) {
-                    String html = "\n<ul id=\"{0}\" class=\"nav nav-list\">\n";
-                    html = MessageFormat.format(html, item.getMenuId().toString());
-                    sb.append(html);
-                    sb.append(toHtml(null, item));
-                    sb.append("</ul>");
-                } else {
-
-                    String html = "\n"
-                            + "<li id=\"f{0}\" class=\"nr-pmenu\">                 \n"
-                            + "    <a href=\"#\" class=\"dropdown-toggle\">    \n"
-                            + "    <i class=\"{1}\"></i>                       \n"
-                            + "    <span class=\"menu-text\"> {2} </span>      \n"
-                            + "    <b class=\"arrow icon-angle-down\"></b>     \n"
-                            + "    </a>                                        \n"
-                            + "    <ul id=\"{0}\" class=\"submenu\">           \n"
-                            + "\n";
-                    html = MessageFormat.format(html, item.getMenuId().toString(), item.getMenuStyle(), item.getMenuName());
-
-                    sb.append(html);
-                    sb.append(toHtml(null, item));
-                    sb.append("</ul></li>");
-                }
-            } else {
-                String html = "\n"
-                        + "<li id=\"f{0}\">        \n"
-                        + "<a href=\"{4}?mid=f{0}\" data-url=\"{1}\">        \n"
-                        + "<i class=\"{2}\"></i>   \n"
-                        + "{3}                     \n"
-                        + "</a>                    \n"
-                        + "</li>                   \n"
-                        + "\n";
-                if (useCache) {
-                    html = MessageFormat.format(html, item.getMenuId().toString(), item.getMenuUrl(), item.getMenuStyle(), item.getMenuName(), "main");
-                } else {
-                    html = MessageFormat.format(html, item.getMenuId().toString(), item.getMenuUrl(), item.getMenuStyle(), item.getMenuName(), item.getMenuUrl());
-                }
-                sb.append(html);
-            }
-        }
-
-        return sb.toString();
-    }
 }

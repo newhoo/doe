@@ -3,7 +3,7 @@
 
 
     <property name="APP_NAME" value="doe" />
-    <property name="LOG_PATH" value="/app/applogs/${APP_NAME}" />
+    <property name="LOG_PATH" value="logs" />
 
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">

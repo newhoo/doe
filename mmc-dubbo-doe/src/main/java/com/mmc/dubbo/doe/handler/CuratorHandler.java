@@ -85,13 +85,15 @@ public class CuratorHandler {
 
         Map<String, String> map = new HashMap<>();
         map.put(Constants.INTERFACE_KEY, dto.getServiceName());
+        map.put(Constants.VERSION_KEY, Constants.ANY_VALUE);
+        map.put(Constants.GROUP_KEY, Constants.ANY_VALUE);
 
-        if (StringUtils.isNotEmpty(dto.getVersion())) {
-            map.put(Constants.VERSION_KEY, dto.getVersion());
-        }
-        if (StringUtils.isNotEmpty(dto.getGroup())) {
-            map.put(Constants.GROUP_KEY, dto.getGroup());
-        }
+//        if (StringUtils.isNotEmpty(dto.getVersion())) {
+//            map.put(Constants.VERSION_KEY, dto.getVersion());
+//        }
+//        if (StringUtils.isNotEmpty(dto.getGroup())) {
+//            map.put(Constants.GROUP_KEY, dto.getGroup());
+//        }
 
         URL url = new URL(protocol, host, port, map);
         List<URL> list = registry.lookup(url);
